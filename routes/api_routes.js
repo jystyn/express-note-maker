@@ -25,7 +25,7 @@ notes_router.post('/notes', (request, response) => {
 
             note_data.push(new_note);
 ;
-            fs.promises.WriteFile(db_path, JSON.stringify(note_data, null, 2))
+            fs.promises.writeFile(db_path, JSON.stringify(note_data, null, 2))
                 .then(() =>response.json(note_data))
                 .catch(err => console.log(err));
         })
