@@ -10,25 +10,25 @@ function getNoteData() {
 
 notes_router.get('/notes', (request, response) => {
     getNoteData()
-        .then(note_data => {
-            response.json(note_data);
-            console.log(note_data);
-        })
+        .then(note_data => response.json(note_data))
         .catch(err => console.log(err));
 });
 
 notes_router.post('/notes', (request, response) => {
     getNoteData()
         .then(note_data => {
-            const new_note = request.body
-            console.log(new_note);
+            const new_note = request.body;
 
             note_data.push(new_note);
-;
+
             fs.promises.writeFile(db_path, JSON.stringify(note_data, null, 2))
-                .then(() =>response.json(note_data))
-                .catch(err => console.log(err));
+                .then(() => response.json(note_data))
+                .catch(err => console.log(err)); 
         })
+});
+
+notes_router.delete('/notes', (request, respons) => {
+    // getNoteData()
 })
 
 module.exports = notes_router;

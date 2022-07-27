@@ -5,6 +5,7 @@ const path = require('path');
 
 const api_routes = require('./routes/api_routes');
 
+
 // Share Static/Browser Files ** this connects browser file to server
 app.use(express.static(path.join(__dirname, 'public')));
 
