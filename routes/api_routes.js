@@ -4,17 +4,20 @@ const path = require('path');
 const uuid = require('uuid').v4;
 const db_path = path.join(__dirname, '../db/db.json');
 
+// Reads in notes from db.json
 function getNoteData() {
     return fs.promises.readFile(db_path, 'utf8')
         .then(data => JSON.parse(data));
 }
 
+// Gets saved notes
 notes_router.get('/notes', (request, response) => {
     getNoteData()
         .then(note_data => response.json(note_data))
         .catch(err => console.log(err));
 });
 
+// Posts new note
 notes_router.post('/notes', (request, response) => {
     getNoteData()
         .then(note_data => {
@@ -31,6 +34,7 @@ notes_router.post('/notes', (request, response) => {
         })
 });
 
+// Deletes selected note
 notes_router.delete('/notes/:id', (request, response) => {
     getNoteData()
         .then(note_data => {
